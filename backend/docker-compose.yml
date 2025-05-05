@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+    url-shortener-backend:
+        container_name: url-shortener-backend
+        build: .
+        working_dir: /backend/
+        image: kallenl/url-shortener-backend:latest
+        command: sh -c "uvicorn main:app --reload --port=8000 --host=0.0.0.0"
+        ports:
+            - 8000:8000
+        env_file: ".env"
+        volumes:
+            - ./:/backend/
+        restart: on-failure
